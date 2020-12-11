@@ -1,0 +1,7 @@
+C:\Users\KristofferJohansson\Documents\Programmering\eHandel\eHandel\obj\Debug\eHandel.csprojAssemblyReference.cache
+C:\Users\KristofferJohansson\Documents\Programmering\eHandel\eHandel\obj\Debug\eHandel.csproj.CoreCompileInputs.cache
+C:\Users\KristofferJohansson\Documents\Programmering\eHandel\eHandel\bin\Debug\eHandel.exe.config
+C:\Users\KristofferJohansson\Documents\Programmering\eHandel\eHandel\bin\Debug\eHandel.exe
+C:\Users\KristofferJohansson\Documents\Programmering\eHandel\eHandel\bin\Debug\eHandel.pdb
+C:\Users\KristofferJohansson\Documents\Programmering\eHandel\eHandel\obj\Debug\eHandel.exe
+C:\Users\KristofferJohansson\Documents\Programmering\eHandel\eHandel\obj\Debug\eHandel.pdb
