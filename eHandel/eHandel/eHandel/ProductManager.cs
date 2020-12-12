@@ -8,10 +8,17 @@ namespace eHandel
 {
     class ProductManager
     {
-        ProductManager myProdManager = new ProductManager();
-        AppManager instance = new AppManager();
+        //ProductManager myProdManager = new ProductManager();
+        //AppManager instance = new AppManager();
 
         Product[] ArrayOfProducts = new Product[5];
+        private int quantity;
+
+        private List<Product> shopingCartList;
+        public ProductManager()
+        {
+            shopingCartList = new List<Product>();
+        }
 
         public Product[] BasicProducts()
         {
@@ -90,14 +97,14 @@ namespace eHandel
                     break;
                 case "0":
                     //Återvänd till huvudmeny
-                    instance.RunProgram();
+                    //instance.DisplayMainMenu();
                     break;
             }
         }
 
-        public void GetProductById(int id)
+        /*public void GetProductById(int id)
         {
-            Product[] ProductById = BasicProducts();
+            Product[] ProductById = myProdManager.BasicProducts();
             int i = id;
 
             Console.WriteLine("Product Name \t\tProduct Description \t\t\t\tPrice");
@@ -126,12 +133,31 @@ namespace eHandel
                     break;
             }
 
+        }*/
+
+        public Product GetProductById(int id)
+        {
+            Product[] ProductById = BasicProducts();
+            return ProductById[id - 1];
         }
 
-        public void AddToShoppingCart() 
+        public void AddToShoppingCart(Product item) 
         {
+            SetShoppingCart(item);
+            //shopingCartList.Add(new Product(6, "Test", "Enkelt test", 1200.00));
+            Console.WriteLine("Desired quantity?");
+            SetQuantity(Convert.ToInt32(Console.ReadLine()));
+            Console.WriteLine(quantity + "items added to your shopping cart!");
+            
+            /*foreach(var p in shopingCartList)
+            {
+                Console.WriteLine(p.GetProductName() + "\t\t" + p.GetProductID() + "\t\t\t" + p.GetProductPrice() + "SEK");
+            }
+            Console.ReadLine();*/
+            
+
             //Lägg till produkt i varukorg
-            Console.WriteLine("[1] Choose wich item you would like to add by entering ProduktID.");
+            /*Console.WriteLine("[1] Choose wich item you would like to add by entering ProduktID.");
             int UserAdd = Convert.ToInt32(Console.ReadLine());
             GetProductById(UserAdd);
 
@@ -150,7 +176,35 @@ namespace eHandel
             }
 
             NewCart[NewCart.Length - 1] = GetProductById(UserAdd);
-            return NewCart;
+            return NewCart;*/
+        }
+
+        public void TestShoppingCartList()
+        {
+            shopingCartList.Add(new Product(6, "Test", "Enkelt test", 1200.00));
+        }
+
+        public List<Product> GetShoppingCart()
+        {
+            Console.WriteLine(shopingCartList.Count());
+            return this.shopingCartList;
+        }
+
+        private void SetShoppingCart(Product item)
+        {
+            Console.WriteLine(item.GetProductName());
+            shopingCartList.Add(item);
+            Console.WriteLine(shopingCartList.Count());
+        }
+
+        public int GetQuantity()
+        {
+            return quantity;
+        }
+
+        private int SetQuantity(int a)
+        {
+            return quantity = a;
         }
     }
 }

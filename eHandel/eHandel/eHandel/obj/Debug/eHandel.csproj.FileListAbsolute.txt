@@ -12,3 +12,10 @@ C:\Users\PontusHaglund\Desktop\Kristoffer_dev\eHandel\eHandel\eHandel\obj\Debug\
 C:\Users\PontusHaglund\Desktop\Kristoffer_dev\eHandel\eHandel\eHandel\obj\Debug\eHandel.csproj.CoreCompileInputs.cache
 C:\Users\PontusHaglund\Desktop\Kristoffer_dev\eHandel\eHandel\eHandel\obj\Debug\eHandel.exe
 C:\Users\PontusHaglund\Desktop\Kristoffer_dev\eHandel\eHandel\eHandel\obj\Debug\eHandel.pdb
+C:\Users\Sebastian\source\repos\eHandel\eHandel\eHandel\eHandel\obj\Debug\eHandel.csprojAssemblyReference.cache
+C:\Users\Sebastian\source\repos\eHandel\eHandel\eHandel\eHandel\obj\Debug\eHandel.csproj.CoreCompileInputs.cache
+C:\Users\Sebastian\source\repos\eHandel\eHandel\eHandel\eHandel\obj\Debug\eHandel.exe
+C:\Users\Sebastian\source\repos\eHandel\eHandel\eHandel\eHandel\obj\Debug\eHandel.pdb
+C:\Users\Sebastian\source\repos\eHandel\eHandel\eHandel\eHandel\bin\Debug\eHandel.exe.config
+C:\Users\Sebastian\source\repos\eHandel\eHandel\eHandel\eHandel\bin\Debug\eHandel.exe
+C:\Users\Sebastian\source\repos\eHandel\eHandel\eHandel\eHandel\bin\Debug\eHandel.pdb
