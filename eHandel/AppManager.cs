@@ -10,6 +10,7 @@ namespace eHandel
     {
 		public void RunProgram()
         {
+            Console.Title = "eCommerce Online Shop";
             Visuals myMenu = new Visuals();
             myMenu.DisplayMainMenu();
         }

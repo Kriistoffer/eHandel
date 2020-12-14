@@ -8,12 +8,13 @@ namespace eHandel
 {
     class Visuals
     {
-		ProductManager ManageProduct = new ProductManager();
+        ProductManager ManageProduct = new ProductManager();
         List<Product> listShoppingCart = new List<Product>();
         private string firstName;
         private string lastName;
         private string deliveryAdress;
         private double totalPrice;
+        private int totalQuantity;
 
         string[] MenuOptions = {
             "Welcome to eCommerce Squads Online Shop.",
@@ -36,20 +37,26 @@ namespace eHandel
 
             string UserInput = Console.ReadLine();
 
-            switch (UserInput)
+            if (UserInput == "1")
             {
-                case "1":
-                    //Visa alla produkter
-                    DisplayAllProducts();
-                    break;
-                case "2":
-                    //Visa varukorgen
-                    DisplayShoppingCart();
-                    break;
-                case "0":
-                    //Avsluta programmet
-                    Environment.Exit(0);
-                    break;
+                //Visa alla produkter
+                DisplayAllProducts();
+            }
+            else if (UserInput == "2")
+            {
+                //Visa varukorgen
+                DisplayShoppingCart();
+            }
+            else if (UserInput == "0")
+            {
+                //Avsluta programmet
+                Environment.Exit(0);
+            }
+            else
+            {
+                Console.WriteLine("\nPlease, enter a valid option (Number 1, 2, or 0).");
+                System.Threading.Thread.Sleep(2500);
+                DisplayMainMenu();
             }
         }
 
@@ -57,35 +64,40 @@ namespace eHandel
         {
             Console.Clear();
             Console.WriteLine("Product Name \t\tProduct Description \t\t\t\tPrice");
-            Console.WriteLine("--------------------------------------------------------------");
-            Console.WriteLine(p.GetProductName() + "\t\t" + p.GetProductInfo() + "\t\t" + p.GetProductPrice());
-            Console.WriteLine("---------------------------------------------------------------");
+            Console.WriteLine("------------------------------------------------------------------------------");
+            Console.WriteLine(p.GetProductName() + "\t\t" + p.GetProductInfo() + "\t\t\t\t" + p.GetProductPrice());
+            Console.WriteLine("------------------------------------------------------------------------------");
             Console.WriteLine("\n\n[1]Add item to your shopping cart. \n[2]Return to \"Show all products\". \n[0]Return to the main menu. \n\nPlease, pick an option:");
 
             string UserInput2 = Console.ReadLine();
 
-            switch (UserInput2)
+            if (UserInput2 == "1")
             {
-                case "1":
-                    //Lägg till vara i varukorg
-                    ManageProduct.AddToShoppingCart(p);
-                    Console.WriteLine("\nHow many items of this product would you like to add to your shopping cart?");
-                    int wantedQuantity = Convert.ToInt32(Console.ReadLine());
-                    p.SetProductQuantity(p, wantedQuantity);
-                    Console.WriteLine("\n\n" + wantedQuantity + " items added to your shopping cart!");
-                    System.Threading.Thread.Sleep(2500);
-                    DisplayAllProducts();
-                    break;
-                case "2":
-                    //Visa alla produkter
-                    DisplayAllProducts();
-                    break;
-                case "0":
-                    //Visa huvudmenyn
-                    DisplayMainMenu();
-                    break;
+                //Lägg till vara i varukorg
+                ManageProduct.AddToShoppingCart(p);
+                Console.WriteLine("\nHow many items of this product would you like to add to your shopping cart?");
+                int wantedQuantity = Convert.ToInt32(Console.ReadLine());
+                p.SetProductQuantity(p, wantedQuantity);
+                Console.WriteLine("\n\n" + wantedQuantity + " items added to your shopping cart!");
+                System.Threading.Thread.Sleep(2500);
+                DisplayAllProducts();
             }
-
+            else if (UserInput2 == "2")
+            {
+                //Visa alla produkter
+                DisplayAllProducts();
+            }
+            else if (UserInput2 == "0")
+            {
+                //Visa huvudmenyn
+                DisplayMainMenu();
+            }
+            else
+            {
+                Console.WriteLine("\nPlease, enter a valid option (Number 1, 2, or 0).");
+                System.Threading.Thread.Sleep(2500);
+                DisplayProductById(p);
+            }
         }
 
         public void DisplayAllProducts()
@@ -105,22 +117,36 @@ namespace eHandel
 
             string UserInput = Console.ReadLine();
 
-            switch (UserInput)
+            if (UserInput == "1")
             {
-                case "1":
-                    //Visa produkt
-                    Console.WriteLine("Which item would you like to view?");
-                    int UserInput4 = Convert.ToInt32(Console.ReadLine());
-                    DisplayProductById(ManageProduct.GetProductById(UserInput4));
-                    break;
-                case "2":
-                    //Visa varukorg
-                    DisplayShoppingCart();
-                    break;
-                case "0":
-                    //Återvänd till huvudmeny
-                    DisplayMainMenu();
-                    break;
+                //Visa produkt
+                Console.WriteLine("\nWhich item would you like to view?");
+                int UserInput4 = Convert.ToInt32(Console.ReadLine());
+
+                if (UserInput4 > allProducts.Length)
+                {
+                    Console.WriteLine("\nPlease, enter a valid number.");
+                    System.Threading.Thread.Sleep(2500);
+                    DisplayAllProducts();
+                }
+
+                DisplayProductById(ManageProduct.GetProductById(UserInput4));
+            }
+            else if (UserInput == "2")
+            {
+                //Visa varukorg
+                DisplayShoppingCart();
+            }
+            else if (UserInput == "0")
+            {
+                //Återvänd till huvucmeny
+                DisplayMainMenu();
+            }
+            else
+            {
+                Console.WriteLine("\nPlease, enter a valid option (Number 1, 2, or 0).");
+                System.Threading.Thread.Sleep(2500);
+                DisplayAllProducts();
             }
         }
 
@@ -142,16 +168,21 @@ namespace eHandel
 
             string UserInput5 = Console.ReadLine();
 
-            switch(UserInput5)
+            if (UserInput5 == "1")
             {
-                case "1":
-                    //Order
-                    AddInformation();
-                    break;
-                case "0":
-                    //Återvänd till huvudmeny
-                    DisplayMainMenu();
-                    break;
+                //Order
+                AddInformation();
+            }
+            else if (UserInput5 == "0")
+            {
+                //Återvänd till huvudmeny
+                DisplayMainMenu();
+            }
+            else
+            {
+                Console.WriteLine("\nPlease, enter a valid option (Number 1 or 0).");
+                System.Threading.Thread.Sleep(2500);
+                DisplayShoppingCart();
             }
         }
 
@@ -259,14 +290,15 @@ namespace eHandel
 
             listShoppingCart = ManageProduct.GetShoppingCart();
 
-            foreach(var p in listShoppingCart)
+            foreach (var p in listShoppingCart)
             {
                 Console.WriteLine(p.GetProductName() + "\t\t" + p.GetProductQuantity() + "\t\t\t" + p.GetProductQuantity() * p.GetProductPrice() + " SEK");
                 totalPrice += p.GetProductQuantity() * p.GetProductPrice();
+                totalQuantity += p.GetProductQuantity();
             }
 
             Console.WriteLine("-------------------------------------------------------------");
-            Console.WriteLine("\t\t\t\tTotal price: " + "\t" + totalPrice + " SEK");
+            Console.WriteLine($"\tTotal Quantity: {totalQuantity} \t Total price: {totalPrice} SEK");
             Console.WriteLine("\n\n\n[1]Finilize the order and exit the shop. \n[0]Something wrong? Empty the shopping cart and return to the main menu.");
             Console.WriteLine("\n\nPlease, pick an option:");
 

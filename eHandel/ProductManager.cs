@@ -8,7 +8,7 @@ namespace eHandel
 {
     class ProductManager
     {
-		Product[] ArrayOfProducts = new Product[5];
+        Product[] ArrayOfProducts = new Product[5];
         private List<Product> shoppingCartList = new List<Product>();
 
         public Product[] BasicProducts()
@@ -37,11 +37,6 @@ namespace eHandel
         public List<Product> GetShoppingCart()
         {
             return this.shoppingCartList;
-        }
-
-        private void SetShoppingCart(Product item)
-        {
-            shoppingCartList.Add(item);
         }
     }
 }

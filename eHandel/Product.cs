@@ -8,7 +8,7 @@ namespace eHandel
 {
     class Product
     {
-		private int productID;
+        private int productID;
         private string productName;
         private string productInfo;
         private double productPrice;
