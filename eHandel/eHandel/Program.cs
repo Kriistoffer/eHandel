@@ -1,4 +1,4 @@
-﻿    using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,7 +10,8 @@ namespace eHandel
     {
         static void Main(string[] args)
         {
-            AppManager.DisplayMenu();
+			AppManager ManageApp = new AppManager();
+            ManageApp.RunProgram();
         }
     }
 }
