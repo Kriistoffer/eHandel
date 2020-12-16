@@ -9,7 +9,7 @@ namespace eHandel
     class Visuals
     {
         ProductManager ManageProduct = new ProductManager();
-        AdminPage Admin = new AdminPage();
+        //AdminPage Admin = new AdminPage();
         List<Product> listShoppingCart = new List<Product>();
         private string firstName;
         private string lastName;
@@ -22,7 +22,7 @@ namespace eHandel
             "",
             "[1]Show all products.",
             "[2]Show your shopping cart.",
-            "[9]Login as admin.",
+            //"[9]Login as admin.",
             "[0]Exit the online shop.",
             "",
             "",
@@ -49,11 +49,11 @@ namespace eHandel
                 //Visa varukorgen
                 DisplayShoppingCart();
             }
-            else if (InputMainmenuOption == "9")
-            {
-                //Logga in som admin
-                LoginAdmin();
-            }
+            //else if (InputMainmenuOption == "9")
+            //{
+            //    //Logga in som admin
+            //    LoginAdmin();
+            //}
             else if (InputMainmenuOption == "0")
             {
                 //Avsluta programmet
@@ -113,11 +113,11 @@ namespace eHandel
         public void DisplayAllProducts()
         {
             Console.Clear();
-            Product[] allProducts = ManageProduct.BasicProducts();
+            //Product[] allProducts = ManageProduct.BasicProducts();
             Console.WriteLine("Product ID \tProduct Name \t\t\tPrice");
             Console.WriteLine("---------------------------------------------------------");
-
-            foreach (var p in allProducts)
+            // bytte ut allProducts mot ManageProducts.BasicProducts()
+            foreach (var p in ManageProduct.BasicProducts())
             {
                 Console.WriteLine(p.GetProductID() + "\t\t" + p.GetProductName() + "\t\t\t" + p.GetProductPrice() + " SEK");
             }
@@ -130,10 +130,10 @@ namespace eHandel
             if (InputAllproductsOption == "1")
             {
                 //Visa produkt
-                Console.WriteLine("\nWhich item would you like to view?");
+                Console.WriteLine("\nWhich item would you like to view?, Choose på entering the desired product by ID.");
                 int InputItemchoice = Convert.ToInt32(Console.ReadLine());
 
-                if (InputItemchoice > allProducts.Length)
+                if (InputItemchoice > ManageProduct.BasicProducts().Length)
                 {
                     Console.WriteLine("\nPlease, enter a valid number. Press a key to enter your option again.");
                     //System.Threading.Thread.Sleep(2500);
@@ -219,45 +219,7 @@ namespace eHandel
                 DisplayShoppingCart();
             }
         }
-        /*
-        public void DisplayShoppingCart()
-        {
-            Console.Clear();
-            Console.WriteLine("Product Name \tProduct Quantity \t\tPrice");
-            Console.WriteLine("---------------------------------------------------------");
-
-            //Lägger våra standardprodukter i en lista för att sedan loopa igenom listan.
-            listShoppingCart = ManageProduct.GetShoppingCart();
-
-            foreach (var p in listShoppingCart)
-            {
-                Console.WriteLine(p.GetProductName() + "\t\t" + p.GetProductQuantity() + "\t\t\t" + p.GetProductPrice() + " SEK");
-            }
-
-            Console.WriteLine("---------------------------------------------------------");
-            Console.WriteLine("\n\n[1]Order your products. \n[0]To return to the main menu.\n\nPlease, pick an option:");
-
-            string InputCartOption = Console.ReadLine();
-
-            if (InputCartOption == "1")
-            {
-                //Order
-                AddInformation();
-            }
-            else if (InputCartOption == "0")
-            {
-                //Återvänd till huvudmeny
-                DisplayMainMenu();
-            }
-            else
-            {
-                Console.WriteLine("\nPlease, enter a valid option (Number 1 or 0). Press a key to enter your option again.");
-                //System.Threading.Thread.Sleep(2500);
-                Console.ReadKey();
-                DisplayShoppingCart();
-            }
-        }
-        */
+        
 
         public void AskFirstName()
         {
@@ -396,91 +358,69 @@ namespace eHandel
                 totalQuantity += ProductsCount[value];
             }
 
+            // Skapar en variabel som formaterar totalPrice så att utskkriften skrivs ut i thousands seperator.
+            string fTotalPrice = string.Format("{0:0,0}", totalPrice);
+            
             Console.WriteLine("-------------------------------------------------------------");
-            Console.WriteLine($"\tTotal Quantity: {totalQuantity} \t Total price: {totalPrice} SEK");
+            Console.WriteLine($"\tTotal Quantity: {totalQuantity} \t Total price:   {fTotalPrice} SEK");
+            
             Console.WriteLine("\n\n\n[1]Finilize the order and exit the shop. \n[0]Something wrong? Empty the shopping cart and return to the main menu.");
             Console.WriteLine("\n\nPlease, pick an option:");
-
+            
+            
             string UserInput = Console.ReadLine();
 
             if (UserInput == "1")
             {
-                Console.WriteLine("\n\nYour order has been sent! Thank you for your order.");
+                Console.WriteLine("\n\nYour order has been sent! Thank you for your order.\n");
                 Environment.Exit(0);
             }
             else if (UserInput == "0")
             {
+                totalQuantity = 0;
+                totalPrice = 0;
                 listShoppingCart.Clear();
                 DisplayMainMenu();
             }
 
         }
-        /*
-        public void MakeOrder()
-        {
-            Console.Clear();
-            Console.WriteLine("\t\tRECEIPT AND ORDER CONFIRMATION");
-            Console.WriteLine("-------------------------------------------------------------");
-            Console.WriteLine("-------------------------------------------------------------");
-            Console.WriteLine("-------------------------------------------------------------");
-            Console.WriteLine("DELIVERY INFORMATION\n");
-            Console.WriteLine("Name: " + this.GetFirstName() + " " + this.GetLastName());
-            Console.WriteLine("Adress: " + this.GetDeliveryAdress());
-            Console.WriteLine("-------------------------------------------------------------");
-            Console.WriteLine("-------------------------------------------------------------");
-            Console.WriteLine("Product Name \t\tProduct Quantity \tPrice");
-            Console.WriteLine("-------------------------------------------------------------");
+        
+        //public void LoginAdmin()
+        //{
+        //    Console.Clear();
+        //    Console.WriteLine("What's your username?");
+        //    string inputUsername = Console.ReadLine();
 
-            listShoppingCart = ManageProduct.GetShoppingCart();
+        //    Console.WriteLine("\nWhat's your password?");
+        //    string inputPassword = Console.ReadLine();
 
-            foreach (var p in listShoppingCart)
-            {
-                Console.WriteLine(p.GetProductName() + "\t\t" + p.GetProductQuantity() + "\t\t\t" + p.GetProductQuantity() * p.GetProductPrice() + " SEK");
-                totalPrice += p.GetProductQuantity() * p.GetProductPrice();
-                totalQuantity += p.GetProductQuantity();
-            }
+        //    if (inputUsername == Admin.GetUsername() && inputPassword == Admin.GetPassword())
+        //    {
+        //        Console.WriteLine("[1] Add new item to store. \n [0]To return to the main menu.\n\nPlease, pick an option: ");
+        //        string AddItemInput = Console.ReadLine();
+        //        if (AddItemInput == "1")
+        //        {
+        //            //Visa adminsida
+        //            foreach (var product in ManageProduct.BasicProducts())
+        //            {
+        //                ManageProduct.AddToArray(ManageProduct.NewProductInformation(product));
+        //                DisplayAllProducts();
+        //            }
+        //        }
+        //        else if (AddItemInput == "0")
+        //        {
+        //            DisplayMainMenu();
+        //        }
 
-            Console.WriteLine("-------------------------------------------------------------");
-            Console.WriteLine($"\tTotal Quantity: {totalQuantity} \t Total price: {totalPrice} SEK");
-            Console.WriteLine("\n\n\n[1]Finilize the order and exit the shop. \n[0]Something wrong? Empty the shopping cart and return to the main menu.");
-            Console.WriteLine("\n\nPlease, pick an option:");
-
-            string InputOrderOption = Console.ReadLine();
-
-            if (InputOrderOption == "1")
-            {
-                Console.WriteLine("\n\nYour order has been sent! Thank you for your order.");
-                Environment.Exit(0);
-            }
-            else if (InputOrderOption == "0")
-            {
-                listShoppingCart.Clear();
-                DisplayMainMenu();
-            }
-
-        }
-        */
-        public void LoginAdmin()
-        {
-            Console.Clear();
-            Console.WriteLine("What's your username?");
-            string inputUsername = Console.ReadLine();
-
-            Console.WriteLine("\nWhat's your password?");
-            string inputPassword = Console.ReadLine();
-
-            if (inputUsername == Admin.GetUsername() && inputPassword == Admin.GetPassword())
-            {
-                //Visa adminsida
-            }
-            else
-            {
-                Console.WriteLine("\nYou have entered incorrect information. Press a key to return to the main menu.");
-                //System.Threading.Thread.Sleep(2500);
-                Console.ReadKey();
-                DisplayMainMenu();
-            }
-        }
+        //    }
+        //    else
+        //    {
+        //        Console.WriteLine("\nYou have entered incorrect information. Press a key to return to the main menu.");
+        //        //System.Threading.Thread.Sleep(2500);
+        //        Console.ReadKey();
+        //        DisplayMainMenu();
+        //    }
+        //}
 
         /*Getters och setters för de olika privata variablerna som innehåller namn och adress.*/
         private void SetFirstName(string _firstName)

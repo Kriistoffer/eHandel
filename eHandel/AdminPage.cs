@@ -6,20 +6,20 @@ using System.Threading.Tasks;
 
 namespace eHandel
 {
-    class AdminPage
-    {
-        private string password = "pw12";
-        private string username = "admin";
+    //class AdminPage
+    //{
+    //    private string password = "pw12";
+    //    private string username = "admin";
 
 
-        public string GetPassword()
-        {
-            return password;
-        }
+    //    public string GetPassword()
+    //    {
+    //        return password;
+    //    }
 
-        public string GetUsername()
-        {
-            return username;
-        }
-    }
+    //    public string GetUsername()
+    //    {
+    //        return username;
+    //    }
+    //}
 }
