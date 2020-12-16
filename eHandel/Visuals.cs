@@ -9,7 +9,7 @@ namespace eHandel
     class Visuals
     {
         ProductManager ManageProduct = new ProductManager();
-        AdminPage Admin = new AdminPage();
+        //AdminPage Admin = new AdminPage();
         List<Product> listShoppingCart = new List<Product>();
         private string firstName;
         private string lastName;
@@ -79,10 +79,9 @@ namespace eHandel
         public void DisplayProductById(Product p)
         {
             Console.Clear();
-            //Console.WriteLine("Product Name \t\tProduct Description \t\t\t\t\t\tPrice per item");
-            Console.WriteLine("{0,0}{1,35}{2,40}", "Product name", "Price per item", "Product Description");
+            Console.WriteLine("Product Name \t\tProduct Description \t\t\tPrice per item");
             Console.WriteLine("-------------------------------------------------------------------------------------------");
-            Console.WriteLine("{0,0}{1,28} SEK{2,45}", p.GetProductName(), p.GetProductPrice(), p.GetProductInfo());
+            Console.WriteLine(p.GetProductName() + "\t\t" + p.GetProductInfo() + "\t\t\t" + p.GetProductPrice() + " SEK");
             Console.WriteLine("-------------------------------------------------------------------------------------------");
             Console.WriteLine("\n\n[1]Add item to your shopping cart. \n[2]Return to \"Show all products\". \n[0]Return to the main menu. \n\nPlease, pick an option:");
 
@@ -130,13 +129,11 @@ namespace eHandel
         public void DisplayAllProducts()
         {
             Console.Clear();
-            Product[] allProducts = ManageProduct.BasicProducts();
             Console.WriteLine("{0,10}{1,18}{2,20}", "Product ID", "Product name", "Price");
             Console.WriteLine("---------------------------------------------------------");
 
-            foreach (var p in allProducts)
+            foreach (var p in ManageProduct.BasicProducts())
             {
-                //Console.WriteLine(p.GetProductID() + "\t\t" + p.GetProductName() + "\t\t\t" + p.GetProductPrice() + " SEK");
                 Console.WriteLine("{0,3}{1,25}{2,18} SEK", p.GetProductID(), p.GetProductName(), p.GetProductPrice());
             }
 
@@ -148,10 +145,10 @@ namespace eHandel
             if (InputAllproductsOption == "1")
             {
                 //Visa produkt
-                Console.WriteLine("\nWhich item would you like to view?");
+                Console.WriteLine("\nWhich item would you like to view? Choose by entering the product ID.");
                 int InputItemchoice = Convert.ToInt32(Console.ReadLine());
 
-                if (InputItemchoice > allProducts.Length)
+                if (InputItemchoice > ManageProduct.BasicProducts().Length)
                 {
                     Console.WriteLine("\n\nPlease, enter a valid number. Press a key to enter your option again.");
                     Console.ReadKey();
@@ -371,8 +368,11 @@ namespace eHandel
                 totalQuantity += ProductsCount[value];
             }
 
+            // Skapar en variabel som formaterar totalPrice så att utskkriften skrivs ut i thousands seperator.
+            string fTotalPrice = string.Format("{0:0,0}", totalPrice);
+
             Console.WriteLine("-------------------------------------------------------------");
-            Console.WriteLine($"\tTotal Quantity: {totalQuantity} \t Total price: {totalPrice} SEK");
+            Console.WriteLine($"\tTotal Quantity: {totalQuantity} \t Total price:   {fTotalPrice} SEK");
             Console.WriteLine("\n\n\n[1]Finilize the order and exit the shop. \n[0]Something wrong? Empty the shopping cart and return to the main menu.");
             Console.WriteLine("\n\nPlease, pick an option:");
 
@@ -397,7 +397,7 @@ namespace eHandel
                 MakeOrder();
             }
         }
-
+        /*
         public void LoginAdmin()
         {
             Console.Clear();
@@ -419,7 +419,8 @@ namespace eHandel
                 DisplayMainMenu();
             }
         }
-
+        */
+        /*
         public void AdminMenu()
         {
             Console.Clear();
@@ -454,6 +455,7 @@ namespace eHandel
                 AdminMenu();
             }
         }
+        */
 
         /*Getters och setters för de olika privata variablerna som innehåller namn och adress.*/
         private void SetFirstName(string _firstName)
